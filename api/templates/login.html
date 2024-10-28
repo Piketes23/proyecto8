@@ -1,22 +1,43 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        Login
-    </title>
-
-
-
-
-
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
-    <h1>Login</h1>
-    <a href="{%url 'home' %}">Home</a>
-</body>
 
+<div class="login-container">
+    <h2>WELCOME</h2>
+    {% if messages %}
+        {% for message in messages %}
+            <div id="error-message" class="alert alert-danger">
+                <h4 class="alert-heading">{{ message }}</h4>
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">User:</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="username" required>
+    
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+    
+        <button type="submit">Start Session</button>
+    </form>
+    <p>
+        <button type="button" class="btn btn-danger btn-block btn-lg shadow-lg mt-2">Google Sign in</button>
+    </p>
+    <p>Don't have an account?
+        <a href="{% url 'registro_vista'%}">Sign up here</a>
+    </p>
+   
+</div>
+
+<script src="{% static 'js/alerts/alert_login.js' %}"></script>
+</body>
 </html>
